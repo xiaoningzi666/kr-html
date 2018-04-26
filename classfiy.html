@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<title>知识管理系统</title>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+
+<link rel="stylesheet" href="fa/css/font-awesome.min.css"/>
+<link href="css/common.css" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark" id="navbar">
+  <a class="navbar-brand" href="#">
+  	<img src="img/title_logo.png" width="24" class="kr-navbarImg">
+	<strong>知识库管理系统</strong>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse " id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto kr-navPadding">
+      <li class="nav-item">
+        <a class="nav-link active" href="index.html">知识查询 <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="dept.html">部门管理</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="classfiy.html">知识分类</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">知识管理</a>
+
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="usermsg.html">用户管理</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#">角色管理</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="setup.html">系统设置</a>
+      </li>
+    </ul>
+	<form class="form-inline my-2 my-lg-0 kr-top-right">
+		 <a  href="person_ center.html"><i class="fa fa-user-o"></i> 个人中心</a>
+		 <a href="${baseUrl}/user/loginOut" target="_self">
+		  <i class="fa fa-sign-out"></i> 退出</a>
+	</form>
+        
+	<div class="clearfix"></div>
+</nav>>
+<div class="container-fluid">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="#"><strong class="text-dark"><i class="fa fa-th-list"></i> 知识分类</strong></a>
+					</li>
+				</ul>
+				<div class="btn-group-sm mb-2">
+					<button class="btn btn-info" onclick="javascript:addTopClassify();">
+						<span class="fa fa-th-list"> 添加顶级分类</span>
+					</button>
+					<button class="btn btn-info" href="javascript:location.reload();">
+						<span class="fa fa-refresh"> 刷新分类 </span>
+					</button>
+					<button class="btn btn-info" href="javascript:expandAll();">
+						<span class="fa fa-folder-open"> 全部打开 </span>
+					</button>
+					<button class="btn btn-info" href="javascript:collapseAll();">
+						<span class="fa fa-close"> 全部关闭 </span>
+					</button>
+				</div>
+			</div>
+			<div class="panel-body">
+				<table id="treeTable" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>分类名称</th>
+							<th>级别</th>
+							<th>创建时间</th>
+							<th>创建人</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+							<tr>
+								<td nowrap>
+									<a>
+										
+									</a>
+								</td>
+								<td>
+								
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									
+								</td>
+								<td class="btn-group-sm text-nowrap" width="10">
+									<a  href="javascript:void();" class="btn btn-outline-info" onclick="javascript:classifyEdit(${classify.id},${classify.parentId},'${classify.parentName}','${classify.classifyName}','${classify.createrId}');">编辑</a>
+									<a href="${baseUrl}/knowledge/classifyDelete?id=${classify.id}" class="btn btn-outline-info">删除</a>
+									<a  href="javascript:void();" class="btn btn-outline-info" onclick="javascript:addSubClassify(${classify.id},'${classify.classifyName}');">添加下级分类</a>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<div id="modal" class="modal fade" role="dialog" data-backdrop="false" data-show="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h6 class="modal-title" id="modalTitle">编辑分类</h6>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<form method="post" class="form-horizontal" id="form">
+					<input type="hidden" id="id" name="id" />
+					<input type="hidden" id="parentId" name="parentId" />
+					<div class="modal-body">
+						<div class="form-row mb-3" id="parentClassify">
+							<label for="parentClassifyName" class="control-label col-2 text-right">上级分类 </label>
+							<input type="text" class="form-control form-control-sm col"  id="parentClassifyName" readonly/>
+						</div>
+						
+						<div class="form-row mb-3">
+							<label for="classifyName" class="control-label col-2 text-right">
+								分类名称
+								<span class="text-danger">*</span>
+							</label>
+							<input type="text" name="classifyName" id="classifyName" placeholder="填写知识分类名称" class="form-control form-control-sm col" >
+						</div>
+						<div class="form-row mb-3">
+							<label for="classifyName" class="control-label col-2 text-right">
+								关联人员
+								<span class="text-danger">*</span>
+							</label>
+							<div id="classifyUserTree" class="ztree col"></div>
+							<input name="userIds" id="userIds" type="hidden" />
+						</div>
+					</div>
+					<div class="modal-footer btn-group-sm">
+						<button type="submit" class="btn btn-info" name="doSubmit" id="doSubmit">保存</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<script src="jquery/jquery-3.2.1.min.js" ></script>
+<script src="bootstrap./js/popper.min.js" ></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>   
+</body>
+</html>

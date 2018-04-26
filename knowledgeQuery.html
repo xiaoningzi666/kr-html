@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<title>知识管理系统</title>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css"/>
+<link rel="stylesheet" href="fa/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link href="css/common.css" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark" id="navbar">
+  <a class="navbar-brand" href="#">
+  	<img src="img/title_logo.png" width="24" class="kr-navbarImg">
+	<strong>知识库管理系统</strong>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse " id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto kr-navPadding">
+      <li class="nav-item">
+        <a class="nav-link active" href="index.html">知识查询 <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="dept.html">部门管理</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="classfiy.html">知识分类</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">知识管理</a>
+
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="usermsg.html">用户管理</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#">角色管理</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="setup.html">系统设置</a>
+      </li>
+    </ul>
+	<form class="form-inline my-2 my-lg-0 kr-top-right">
+		 <a  href="person_ center.html"><i class="fa fa-user-o"></i> 个人中心</a>
+		 <a href="${baseUrl}/user/loginOut" target="_self">
+		  <i class="fa fa-sign-out"></i> 退出</a>
+	</form>
+        
+	<div class="clearfix"></div>
+</nav>
+<div class="container-fluid">
+  <ul class="breadcrumb">
+      <li class="breadcrumb-item active"><a href="#"><strong class="text-dark"><i class="fa fa-edit"></i> 知识查询</strong></a></li>
+  </ul>
+  <div class="row kr-h">	
+    <div class="col-2 border-right kr-h">
+  	   <div id="treeDemo" class="kr-ztree ztree "></div>
+    </div>
+    <div class="col">
+  	   <div class="card border-0">
+        <div class="card-header bg-transparent">
+            <form class="">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-2 col-form-label text-right">查询内容</label>
+                    <div class="col">
+                      <input type="text" class="form-control" id="" placeholder="请输入关键字">
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-2 col-form-label text-right">查询内容</label>
+                    <div class="col">
+                      <input type="text" class="form-control" id="" placeholder="请输入关键字">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-2 col-form-label text-right">发布时间</label>
+                    <div class="col form-row">
+
+                      <input type="text" class="form-control col ml-1" id="" placeholder="请输入关键字">&nbsp;-&nbsp;
+                      <input type="text" class="form-control col mr-1" id="" placeholder="请输入关键字">
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-2 col-form-label text-right">发布人</label>
+                    <div class="col">
+                      <input type="text" class="form-control" id="" placeholder="请输入关键字">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="btn-group-sm text-right">
+                <button class="btn btn-info searchBtn">查询</button>
+              </div>
+            </form> 
+          </div> 
+          <div class="card-body">
+            <table id="treeTable" class="table table-bordered">
+              <thead class="thead-light">
+                <tr>
+                  <th>分类名称</th>
+                  <th>级别</th>
+                  <th>创建时间</th>
+                  <th>创建人</th>
+                  <th class="text-center">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td><a href=""></a></td>
+                    <td>    </td>
+                    <td> </td>
+                    <td> </td>
+                    <td nowrap class="btn-group-sm text-nowrap" width="10">
+                      <button type="button" class="btn btn-outline-info" onclick="javascript:classifyEdit(${classify.id},${classify.parentId},'${classify.parentName}','${classify.classifyName}','${classify.createrId}');">编辑</button>
+                      <a href="${baseUrl}/knowledge/classifyDelete?id=${classify.id}" class="btn btn-outline-info" role="button">删除</a>
+                      <button type="button" class="btn btn-outline-info" onclick="javascript:addSubClassify(${classify.id},'${classify.classifyName}');">添加下级部门</button>
+                    </td>  
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="jquery/jquery-3.2.1.min.js" ></script>
+<script src="bootstrap./js/popper.min.js" ></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>    
+<script type="text/javascript" src="ztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript">
+  var setting = {
+      data: {
+        key: {
+          title: "t"
+
+        },
+        simpleData: {
+          enable: true
+        }       
+      },
+      view: {
+        fontCss:{'height':'32px','line-height':'32px'},
+       
+      }
+    };
+
+    var zNodes =[
+      { id:1, pId:0, name:"节点搜索演示 1", t:"id=1", open:true,iconSkin:"pIcon01"},
+      { id:11, pId:1, name:"关键字可以是名字", t:"id=11",iconSkin:"icon01"},
+      { id:12, pId:1, name:"关键字可以是level", t:"id=12",iconSkin:"icon01"},
+      { id:13, pId:1, name:"关键字可以是id", t:"id=13",iconSkin:"icon01"},
+      { id:14, pId:1, name:"关键字可以是各种属性", t:"id=14",iconSkin:"icon01"},
+
+      { id:2, pId:0, name:"节点搜索演示 2", t:"id=2", open:true,iconSkin:"pIcon01"},
+      { id:21, pId:2, name:"可以只搜索一个节点", t:"id=21",iconSkin:"icon01"},
+      { id:22, pId:2, name:"可以搜索节点集合", t:"id=22",iconSkin:"icon01"},
+      { id:23, pId:2, name:"搜我吧", t:"id=23",iconSkin:"icon01"},
+
+      { id:3, pId:0, name:"节点搜索演示 3", t:"id=3", open:true ,iconSkin:"pIcon01"},
+      { id:31, pId:3, name:"我的 id 是: 31", t:"id=31",iconSkin:"icon01"},
+      { id:32, pId:3, name:"我的 id 是: 32", t:"id=32",iconSkin:"icon01"},
+      { id:33, pId:3, name:"我的 id 是: 33", t:"id=33",iconSkin:"icon01"}
+    ];
+    function showIconForTree(treeId, treeNode) {
+      return !treeNode.isParent;
+    };
+    function focusKey(e) {
+      if (key.hasClass("empty")) {
+        key.removeClass("empty");
+      }
+    }
+    function blurKey(e) {
+      if (key.get(0).value === "") {
+        key.addClass("empty");
+      }
+    }
+    var lastValue = "", nodeList = [], fontCss = {};
+    function clickRadio(e) {
+      lastValue = "";
+      searchNode(e);
+    }
+    function searchNode(e) {
+      var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+      if (!$("#getNodesByFilter").attr("checked")) {
+        var value = $.trim(key.get(0).value);
+        var keyType = "";
+        if ($("#name").attr("checked")) {
+          keyType = "name";
+        } else if ($("#level").attr("checked")) {
+          keyType = "level";
+          value = parseInt(value);
+        } else if ($("#id").attr("checked")) {
+          keyType = "id";
+          value = parseInt(value);
+        }
+        if (key.hasClass("empty")) {
+          value = "";
+        }
+        if (lastValue === value) return;
+        lastValue = value;
+        if (value === "") return;
+        updateNodes(false);
+
+        if ($("#getNodeByParam").attr("checked")) {
+          var node = zTree.getNodeByParam(keyType, value);
+          if (node === null) {
+            nodeList = [];
+          } else {
+            nodeList = [node];
+          }
+        } else if ($("#getNodesByParam").attr("checked")) {
+          nodeList = zTree.getNodesByParam(keyType, value);
+        } else if ($("#getNodesByParamFuzzy").attr("checked")) {
+          nodeList = zTree.getNodesByParamFuzzy(keyType, value);
+        }
+      } else {
+        updateNodes(false);
+        nodeList = zTree.getNodesByFilter(filter);
+      }
+      updateNodes(true);
+
+    }
+    function updateNodes(highlight) {
+      var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+      for( var i=0, l=nodeList.length; i<l; i++) {
+        nodeList[i].highlight = highlight;
+        zTree.updateNode(nodeList[i]);
+      }
+    }
+    function getFontCss(treeId, treeNode) {
+      return (!!treeNode.highlight) ? {color:"red", "font-weight":"bold","font-size":"14px"} : {color:"#333", "font-weight":"normal","font-size":"14px"};
+    }
+    function filter(node) {
+      return !node.isParent && node.isFirstNode;
+    }
+
+    var key;
+    $(document).ready(function(){
+      $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+      key = $("#key");
+      key.bind("focus", focusKey)
+      .bind("blur", blurKey)
+      .bind("propertychange", searchNode)
+      .bind("input", searchNode);
+      $("#name").bind("change", clickRadio);
+      $("#level").bind("change", clickRadio);
+      $("#id").bind("change", clickRadio);
+      $("#getNodeByParam").bind("change", clickRadio);
+      $("#getNodesByParam").bind("change", clickRadio);
+      $("#getNodesByParamFuzzy").bind("change", clickRadio);
+      $("#getNodesByFilter").bind("change", clickRadio);
+    });
+</script>
+</body>
+</html>
